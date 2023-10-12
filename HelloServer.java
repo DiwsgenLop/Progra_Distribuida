@@ -8,7 +8,7 @@ public class HelloServer {
         }
 
         try {
-            HelloInterface hello = new Hello("Hello, world!");
+            HelloInterface hello = new Hello("Las palabras que enviaste contienen!");
             String serverIP = args[0];
             Naming.rebind("//" + serverIP + "/Hello", hello);
             System.out.println("Hello Server is ready.");

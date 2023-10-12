@@ -9,7 +9,7 @@ public class Hello extends UnicastRemoteObject implements HelloInterface {
   }
 
   public String say() throws RemoteException {
-    return "Server says: " + message;
+    return "Server: " + message;
   }
 
   public int countVowels(String phrase) throws RemoteException {
