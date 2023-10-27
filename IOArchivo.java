@@ -1,10 +1,12 @@
 import java.io.*;
 import java.rmi.RemoteException;
+import java.rmi.server.UnicastRemoteObject;
 
-public class IOArchivo implements FileInterface{
+public class IOArchivo extends UnicastRemoteObject implements FileInterface{
     private String nombreArchivo;
     //Constructor con parametro para representar el nombre del archivo en el que operar
     public IOArchivo(String nombreArchivo) throws RemoteException {
+        super();
         this.nombreArchivo = nombreArchivo;
     }
     
