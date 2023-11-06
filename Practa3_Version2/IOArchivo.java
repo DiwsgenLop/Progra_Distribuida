@@ -13,7 +13,7 @@ public class IOArchivo extends UnicastRemoteObject implements FileInterface {
         this.nombreArchivo = nombreArchivo;
     }
 
-    // Metodo para descargar el archivo
+    /*// Metodo para descargar el archivo
     public byte[] downloadFile(String fileName) {
         try {
             File file = new File(fileName);
@@ -28,9 +28,9 @@ public class IOArchivo extends UnicastRemoteObject implements FileInterface {
             return (null);
         }
     }
-
+    */
     // Metodo para contarlineas del archivo dado el nombre del archivo String
-    public int contarLineas(String nombreArchivo) {
+    public int contarLineas(String nombreArchivo) throws RemoteException{
         int contador = 0;
         try {
             FileReader fr = new FileReader(nombreArchivo);
@@ -49,7 +49,7 @@ public class IOArchivo extends UnicastRemoteObject implements FileInterface {
     }
 
     // Metodo para contarlas vocales del archivo dado el nombre del archivo String
-    public int cuentavocales(String nombreArchivo) {
+    public int cuentavocales(String nombreArchivo) throws RemoteException{
         int contador = 0;
         try {
             FileReader fr = new FileReader(nombreArchivo);

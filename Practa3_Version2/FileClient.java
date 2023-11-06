@@ -6,7 +6,7 @@ import java.rmi.*;
 public class FileClient {
     public static void main(String argv[]) {
         if (argv.length != 2) {
-            System.out.println("Usage: java FileClient fileName machineName");
+            System.out.println("Usage: java FileClient <operation> <parameter>");
             System.exit(0);
         }
 
@@ -14,44 +14,48 @@ public class FileClient {
             String name = "//" + argv[1] + "/FileServer";
             FileInterface fi = (FileInterface) Naming.lookup(name);
 
-            // Descargar el archivo y contar líneas y vocales
-            byte[] filedata = fi.downloadFile(argv[0]);
-            int lineCount = fi.contarLineas(argv[0]);
-            int vowelCount = fi.cuentavocales(argv[0]);
+            String operation = argv[0];
+            String parameter = argv[1];
 
-            // Imprimir el contenido del archivo
-            System.out.println("Contenido del archivo:");
-            fi.imprimir();
-
-            // Escribir el contenido del archivo en un OutputStream
-            ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
-            fi.escribe(outputStream);
-            byte[] outputStreamData = outputStream.toByteArray();
-
-            // Respaldar el archivo
-            String backupFileName = "backup_" + argv[0];
-            fi.respaldar(backupFileName);
-            System.out.println("Archivo respaldado como: " + backupFileName);
-
-            // Copiar el archivo
-            String copyFileName = "copia_" + argv[0];
-            fi.copiar(copyFileName);
-            System.out.println("Archivo copiado como: " + copyFileName);
-
-            // Renombrar el archivo
-            String newFileName = "nuevo_nombre.txt";
-            fi.renombrar(newFileName);
-            System.out.println("Archivo renombrado como: " + newFileName);
-
-            // Eliminar el archivo
-            fi.eliminar(argv[0]);
-            System.out.println("Archivo eliminado." + argv[0]);
-
-            // Imprimir los valores obtenidos
-            System.out.println("Número de líneas en el archivo: " + lineCount);
-            System.out.println("Número de vocales en el archivo: " + vowelCount);
+            switch (operation) {
+                case "contarLineas":
+                    int lineCount = fi.contarLineas(parameter);
+                    System.out.println("Número de líneas: " + lineCount);
+                    break;
+                case "cuentavocales":
+                    int vowelCount = fi.cuentavocales(parameter);
+                    System.out.println("Número de vocales: " + vowelCount);
+                    break;
+                case "escribe":
+                    OutputStream os = new FileOutputStream("salida.txt");
+                    fi.escribe(os);
+                    os.close();
+                    System.out.println("Contenido del archivo escrito en salida.txt");
+                    break;
+                case "imprimir":
+                    fi.imprimir();
+                    break;
+                case "respaldar":
+                    fi.respaldar(parameter);
+                    System.out.println("Archivo respaldado.");
+                    break;
+                case "copiar":
+                    fi.copiar(parameter);
+                    System.out.println("Archivo copiado a " + parameter);
+                    break;
+                case "renombrar":
+                    fi.renombrar(parameter);
+                    System.out.println("Archivo renombrado a " + parameter);
+                    break;
+                case "eliminar":
+                    fi.eliminar(parameter);
+                    System.out.println("Archivo eliminado.");
+                    break;
+                default:
+                    System.out.println("Operación no válida.");
+            }
         } catch (Exception e) {
-            System.err.println("FileClient exception: " + e.getMessage());
+            System.err.println("FileServer exception: " + e.getMessage());
             e.printStackTrace();
         }
     }
