@@ -1,4 +1,3 @@
-package Practa3_Version2;
 
 import java.rmi.*;
 

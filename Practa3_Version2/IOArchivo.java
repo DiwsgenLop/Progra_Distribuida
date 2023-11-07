@@ -1,4 +1,3 @@
-package Practa3_Version2;
 
 import java.io.*;
 import java.rmi.RemoteException;
@@ -13,24 +12,26 @@ public class IOArchivo extends UnicastRemoteObject implements FileInterface {
         this.nombreArchivo = nombreArchivo;
     }
 
-    /*// Metodo para descargar el archivo
-    public byte[] downloadFile(String fileName) {
-        try {
-            File file = new File(fileName);
-            byte buffer[] = new byte[(int) file.length()];
-            BufferedInputStream input = new BufferedInputStream(new FileInputStream(fileName));
-            input.read(buffer, 0, buffer.length);
-            input.close();
-            return (buffer);
-        } catch (Exception e) {
-            System.out.println("FileImpl: " + e.getMessage());
-            e.printStackTrace();
-            return (null);
-        }
-    }
-    */
+    /*
+     * // Metodo para descargar el archivo
+     * public byte[] downloadFile(String fileName) {
+     * try {
+     * File file = new File(fileName);
+     * byte buffer[] = new byte[(int) file.length()];
+     * BufferedInputStream input = new BufferedInputStream(new
+     * FileInputStream(fileName));
+     * input.read(buffer, 0, buffer.length);
+     * input.close();
+     * return (buffer);
+     * } catch (Exception e) {
+     * System.out.println("FileImpl: " + e.getMessage());
+     * e.printStackTrace();
+     * return (null);
+     * }
+     * }
+     */
     // Metodo para contarlineas del archivo dado el nombre del archivo String
-    public int contarLineas(String nombreArchivo) throws RemoteException{
+    public int contarLineas(String nombreArchivo) throws RemoteException {
         int contador = 0;
         try {
             FileReader fr = new FileReader(nombreArchivo);
@@ -49,7 +50,7 @@ public class IOArchivo extends UnicastRemoteObject implements FileInterface {
     }
 
     // Metodo para contarlas vocales del archivo dado el nombre del archivo String
-    public int cuentavocales(String nombreArchivo) throws RemoteException{
+    public int cuentavocales(String nombreArchivo) throws RemoteException {
         int contador = 0;
         try {
             FileReader fr = new FileReader(nombreArchivo);
@@ -87,7 +88,7 @@ public class IOArchivo extends UnicastRemoteObject implements FileInterface {
     }
 
     // Metodo para imprimir el contenido del archivo en pantalla
-    public void imprimir() {
+    public void imprimir() throws RemoteException {
         try {
             FileReader fr = new FileReader(nombreArchivo);
             BufferedReader br = new BufferedReader(fr);

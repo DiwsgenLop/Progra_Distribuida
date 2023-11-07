@@ -1,21 +1,19 @@
-package Practa3_Version2;
 
 import java.io.*;
 import java.rmi.*;
 
 public class FileClient {
     public static void main(String argv[]) {
-        if (argv.length != 2) {
-            System.out.println("Usage: java FileClient <operation> <parameter>");
+        if (argv.length < 3) {
+            System.out.println("Usage: java FileClient <IP> <operation> <parameter>");
             System.exit(0);
         }
-
+        String ip = argv[0];
+        String operation = argv[1];
+        String parameter = argv[2];
         try {
-            String name = "//" + argv[1] + "/FileServer";
+            String name = "//" + ip + "/FileServer";
             FileInterface fi = (FileInterface) Naming.lookup(name);
-
-            String operation = argv[0];
-            String parameter = argv[1];
 
             switch (operation) {
                 case "contarLineas":
